@@ -326,7 +326,9 @@ async function loadFootballData() {
 
 window.loadLiveData = async function loadLiveData() {
   const config = window.LIVE_CONFIG || {};
-  if (!config.enabled || !config.token) {
+  const usesProxy = Boolean(config.proxyBaseUrl);
+
+  if (!config.enabled || (!usesProxy && !config.token)) {
     return { source: 'demo', reason: 'API desactivada o sin token' };
   }
 
