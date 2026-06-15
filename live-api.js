@@ -168,10 +168,25 @@ function timeFor(date) {
   }).format(new Date(date));
 }
 
+
+function inferStatusByClock(match, mappedStatus) {
+  if (mappedStatus !== 'upcoming' || !match.utcDate) return mappedStatus;
+
+  const kickoff = new Date(match.utcDate).getTime();
+  const now = Date.now();
+  const elapsedMinutes = (now - kickoff) / 60000;
+
+  // football-data can keep matches as TIMED during kickoff; this keeps the UI useful.
+  if (elapsedMinutes >= 0 && elapsedMinutes <= 140) return 'live';
+  if (elapsedMinutes > 140) return 'final';
+
+  return mappedStatus;
+}
+
 function normalizeMatch(match) {
   const mappedStatus = LIVE_STATUS_MAP[match.status] || 'upcoming';
   const hasLiveMinute = Number.isFinite(match.minute) && match.minute > 0;
-  const status = mappedStatus;
+  const status = inferStatusByClock(match, mappedStatus);
   return {
     id: String(match.id),
     timestamp: match.utcDate,
