@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Partidos en vivo, tabla de posiciones y noticias del Mundial 2026."
+    />
+    <title>Mundial 2026 en Vivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Fraunces:opsz,wght@9..144,800;9..144,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#inicio" aria-label="Inicio">
+          <span class="brand-mark">26</span>
+          <span class="brand-copy">
+            <strong>Mundial</strong>
+            <small>en Vivo</small>
+          </span>
+        </a>
+        <nav class="topnav" aria-label="Secciones">
+          <a href="#envivo">En vivo</a>
+          <a href="#partidos">Partidos</a>
+          <a href="#clasificacion">Tabla</a>
+          <a href="#noticias">Noticias</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero-card">
+        <div class="hero-copy">
+          <p class="eyebrow">Mundial 2026</p>
+          <h1>Partidos, posiciones y noticias sin vueltas.</h1>
+          <p>
+            Sigue el Mundial con marcadores, próximos partidos, clasificación de
+            grupos y noticias rápidas para estar al día desde el celular.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#partidos">Ver partidos</a>
+            <a class="secondary-button" href="#noticias">Leer noticias</a>
+          </div>
+        </div>
+        <aside class="live-card" aria-label="Resumen en vivo">
+          <span class="live-dot"></span>
+          <small>Ahora</small>
+          <strong><span id="liveCount">0</span> en vivo</strong>
+          <p><span id="upcomingCount">0</span> próximos partidos cargados</p>
+        </aside>
+      </section>
+
+      <section class="status-strip">
+        <article>
+          <span>Fuente</span>
+          <strong id="sourceStatus">Datos demo</strong>
+        </article>
+        <article>
+          <span>Actualizado</span>
+          <strong id="lastUpdated">--</strong>
+        </article>
+        <article>
+          <span>Partidos</span>
+          <strong><span id="matchCount">0</span> cargados</strong>
+        </article>
+      </section>
+
+      <nav class="section-tabs" aria-label="Navegación principal">
+        <a class="active" href="#envivo">En vivo</a>
+        <a href="#partidos">Partidos</a>
+        <a href="#clasificacion">Clasificación</a>
+        <a href="#noticias">Noticias</a>
+      </nav>
+
+      <section id="envivo" class="panel live-section compact-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Ahora mismo</p>
+            <h2>En vivo</h2>
+          </div>
+        </div>
+        <div id="liveFixturesList" class="live-fixtures-list"></div>
+      </section>
+
+      <section id="partidos" class="panel compact-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Calendario completo</p>
+            <h2>Agenda del Mundial</h2>
+          </div>
+          <div class="filter-tabs">
+            <button class="filter active" type="button" data-filter="today">Hoy</button>
+            <button class="filter" type="button" data-filter="upcoming">Próximos</button>
+            <button class="filter" type="button" data-filter="final">Resultados</button>
+            <button class="filter" type="button" data-filter="all">Todos</button>
+          </div>
+        </div>
+        <div id="fixturesList" class="fixtures-list"></div>
+      </section>
+
+      <section id="clasificacion" class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Tabla por grupos</p>
+            <h2>Clasificación</h2>
+          </div>
+        </div>
+        <div id="standingsList" class="standings-list compact-standings"></div>
+        <button id="toggleStandings" class="wide-button" type="button">Ver todos los grupos</button>
+      </section>
+
+      <section id="noticias" class="panel news-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Actualidad</p>
+            <h2>Noticias del Mundial</h2>
+          </div>
+        </div>
+        <div id="newsList" class="news-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer-note">
+      Proyecto independiente. No afiliado a ninguna entidad oficial del torneo.
+    </footer>
+
+    <div id="scrollControls" class="scroll-controls" aria-label="Controles de desplazamiento">
+      <button id="scrollTopButton" type="button" aria-label="Subir">↑</button>
+      <button id="scrollBottomButton" type="button" aria-label="Bajar">↓</button>
+    </div>
+
+    <div id="groupModal" class="modal-backdrop" hidden>
+      <div class="group-modal" role="dialog" aria-modal="true" aria-labelledby="groupModalTitle">
+        <button id="closeGroupModal" class="modal-close" type="button" aria-label="Cerrar">×</button>
+        <p class="eyebrow">Clasificación</p>
+        <h2 id="groupModalTitle">Grupo</h2>
+        <div id="groupModalBody"></div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="data.js"></script>
+    <script src="live-api.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
