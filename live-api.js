@@ -171,14 +171,14 @@ function timeFor(date) {
 function normalizeMatch(match) {
   const mappedStatus = LIVE_STATUS_MAP[match.status] || 'upcoming';
   const hasLiveMinute = Number.isFinite(match.minute) && match.minute > 0;
-  const status = mappedStatus === 'live' && !hasLiveMinute ? 'updating' : mappedStatus;
+  const status = mappedStatus;
   return {
     id: String(match.id),
     timestamp: match.utcDate,
     dateLabel: dateLabelFor(match.utcDate),
     status,
     minute: hasLiveMinute ? match.minute : undefined,
-    time: status === 'live' ? `${match.minute}'` : timeFor(match.utcDate),
+    time: status === 'live' ? (hasLiveMinute ? `${match.minute}'` : 'En vivo') : timeFor(match.utcDate),
     group: match.group || match.stage || 'Mundial',
     home: {
       name: displayNameFor(match.homeTeam),
